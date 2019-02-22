@@ -128,6 +128,8 @@ class Group extends Component {
               icon="delete"
               className="action action--ADD-DELETE"
               onClick={this.props.removeSelf}
+              aria-labelledby="Delete group"
+              aria-label="Delete group"
             >{this.props.config.settings.delGroupLabel !== undefined ? this.props.config.settings.delGroupLabel : "Delete"}</Button>
           ) : null}
         </ButtonGroup>

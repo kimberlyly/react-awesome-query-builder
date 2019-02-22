@@ -102,6 +102,8 @@ class Rule extends Component {
                 style={styles}
                 ref="rule"
                 data-id={this.props.id}
+                aria-labelledby="Rule"
+                aria-label="Rule"
             >
                 <div className="rule--header">
                     {!this.props.config.settings.readonlyMode &&
@@ -110,6 +112,8 @@ class Rule extends Component {
                             icon="delete"
                             onClick={this.props.removeSelf}
                             size={this.props.config.settings.renderSize || "small"}
+                            aria-labelledby="Delete rule"
+                            aria-label="Delete rule"
                         >
                             {this.props.config.settings.deleteLabel !== undefined ? this.props.config.settings.deleteLabel : "Delete"}
                         </Button>

@@ -14,7 +14,7 @@ export default class SelectWidget extends Component {
     config: PropTypes.object.isRequired,
     field: PropTypes.string.isRequired,
     value: PropTypes.string, //key in listValues
-    customProps: PropTypes.object,
+    customProps: PropTypes.object
   };
 
   shouldComponentUpdate = shallowCompare;
@@ -27,6 +27,10 @@ export default class SelectWidget extends Component {
     return option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
   }
 
+  ariaLabel = (currentVal, position, length, isSelected) => {
+    return `${currentVal}. ${position} of ${length}. ${isSelected ? 'Selected' : 'Not selected'}`;
+  }
+
   render() {
     let size = this.props.config.settings.renderSize || "small";
     let placeholder = this.props.placeholder || "Select option";
@@ -34,6 +38,7 @@ export default class SelectWidget extends Component {
     const options = map(fieldDefinition.listValues, (label, value) => {
       return (<Option key={value} value={value}>{label}</Option>);
     });
+    let numOptions = fieldDefinition.listValues.length;
     let placeholderWidth = calcTextWidth(placeholder, '12px');
     let customProps = this.props.customProps || {};
 
@@ -48,6 +53,8 @@ export default class SelectWidget extends Component {
             value={this.props.value || undefined} //note: (bug?) null forces placeholder to hide
             onChange={this.handleChange}
             filterOption={this.filterOption}
+            aria-labelledby={this.ariaLabel(this.props.value, 1, numOptions, false)}
+            aria-label={this.ariaLabel(this.props.value, 1, numOptions, false)}
             {...customProps}
           >{options}
         </Select>

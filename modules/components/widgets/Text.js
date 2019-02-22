@@ -33,6 +33,8 @@ export default class TextWidget extends Component {
           value={this.props.value || null}
           placeholder={this.props.placeholder}
           onChange={this.handleChange}
+          aria-labelledby="hello"
+          aria-label="hello"
           {...customProps}
         />
       </Col>
